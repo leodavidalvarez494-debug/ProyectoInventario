@@ -21,13 +21,15 @@ namespace Inventario
         }
         public void ActualizarCantidad(string codigo, int nuevaCantidad)
         {
-            foreach (var producto in productos)
+
+            var producto = productos.FirstOrDefault(
+                p => p.Codigo == codigo);
+
+            if (producto != null)
             {
-                if (producto.Codigo == codigo)
-                {
-                    producto.Cantidad = nuevaCantidad;
-                }
+                producto.Cantidad = nuevaCantidad;
             }
         }
     }
+
 }
