@@ -19,5 +19,8 @@ namespace Inventario
         {
             return productos;
         }
+        public void ActualizarCantidad(string codigo, int nuevaCantidad)
+        {
+        }
     }
 }
