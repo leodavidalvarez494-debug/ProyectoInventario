@@ -8,7 +8,7 @@ namespace Inventario
 {
     public class InventarioService
     {
-        private List<Producto> productos = new List<Producto>();
+        private readonly List<Producto> productos = new();
 
         public void RegistrarProducto(Producto producto)
         {
