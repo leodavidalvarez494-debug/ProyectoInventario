@@ -6,7 +6,18 @@ using System.Threading.Tasks;
 
 namespace Inventario
 {
-    internal class InventarioService
+    public class InventarioService
     {
+        private List<Producto> productos = new List<Producto>();
+
+        public void RegistrarProducto(Producto producto)
+        {
+            productos.Add(producto);
+        }
+
+        public List<Producto> ListarProductos()
+        {
+            return productos;
+        }
     }
 }
