@@ -32,5 +32,19 @@ namespace Inventario.Tests
                 20,
                 inventario.ListarProductos()[0].Cantidad);
         }
+
+        [TestMethod]
+        public void ConsultarProducto()
+        {
+            var inventario = new InventarioService();
+
+            inventario.RegistrarProducto(
+                new Producto("P001", "Mouse", 10));
+
+            var producto = inventario.ConsultarProducto("P001");
+
+            Assert.IsNotNull(producto);
+            Assert.AreEqual("Mouse", producto.Nombre);
+        }
     }
 }

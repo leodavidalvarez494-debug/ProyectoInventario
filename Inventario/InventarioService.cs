@@ -30,6 +30,11 @@ namespace Inventario
                 producto.Cantidad = nuevaCantidad;
             }
         }
+
+        public Producto ConsultarProducto(string codigo)
+        {
+            return null;
+        }
     }
 
 }
