@@ -23,7 +23,7 @@ namespace Inventario
 
         public List<Producto> ListarProductos()
         {
-            return productos;
+            return new List<Producto>(productos);
         }
         public void ActualizarCantidad(string codigo, int nuevaCantidad)
         {
