@@ -31,9 +31,10 @@ namespace Inventario
             }
         }
 
-        public Producto ConsultarProducto(string codigo)
+        public Producto? ConsultarProducto(string codigo)
         {
-            return null;
+            return productos.FirstOrDefault(
+            p => p.Codigo == codigo);
         }
     }
 
