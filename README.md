@@ -4,7 +4,7 @@ Un sistema de gestión de inventario completo desarrollado en **C#** que permite
 
 ## 📋 Descripción
 
-**ProyectoInventario** es una aplicación que proporciona herramientas para la gestión integral de tu inventario. Puedes registrar nuevos productos, actualizar información existente, consultar detalles específicos y visualizar un listado completo de todos los artículos disponibles.
+**ProyectoInventario** es una aplicación que proporciona herramientas para la gestión integral de tu inventario. Puedes registrar nuevos productos, actualizar información existente, consultar detalles de productos y listar todo tu inventario.
 
 ## ✨ Características
 
@@ -13,17 +13,20 @@ Un sistema de gestión de inventario completo desarrollado en **C#** que permite
 - ✅ **Consultar información** - Ver detalles específicos de cada producto
 - ✅ **Listar productos** - Visualizar todos los productos del inventario
 - ✅ **Gestión completa de CRUD** - Operaciones Create, Read, Update, Delete
+- ✅ **Suite de pruebas unitarias** - Tests con MSTest para validar funcionalidad
 
 ## 🛠️ Tecnologías Utilizadas
 
 - **Lenguaje:** C#
-- **Plataforma:** .NET Framework / .NET Core
+- **Framework:** .NET 8.0
+- **Testing:** MSTest v3.6.4
+- **IDE:** Visual Studio 2019+
 
 ## 📦 Instalación
 
 ### Requisitos Previos
 - Visual Studio 2019 o superior
-- .NET Framework 4.7+ o .NET 5+
+- .NET 8.0 SDK
 - Git
 
 ### Pasos de instalación
@@ -57,49 +60,81 @@ dotnet build
 dotnet run
 ```
 
+### Ejecutar pruebas
+```bash
+dotnet test
+```
+
 ### Operaciones disponibles
 
 #### 1. Registrar un producto
-```
-Ingresa el nombre del producto, cantidad y precio
-El sistema asignará un ID automático
-```
-
-#### 2. Actualizar un producto
-```
-Proporciona el ID del producto y los nuevos datos
-El sistema actualizará la información
+```csharp
+var inventario = new InventarioService();
+inventario.RegistrarProducto(new Producto("P001", "Mouse", 10));
 ```
 
-#### 3. Consultar información
+#### 2. Actualizar cantidad
+```csharp
+inventario.ActualizarCantidad("P001", 20);
 ```
-Especifica el ID del producto para ver sus detalles
+
+#### 3. Consultar producto
+```csharp
+var producto = inventario.ConsultarProducto("P001");
 ```
 
 #### 4. Listar productos
-```
-Visualiza todos los productos registrados en el inventario
+```csharp
+var productos = inventario.ListarProductos();
 ```
 
 ## 📁 Estructura del Proyecto
 
 ```
 ProyectoInventario/
-├── src/
-│   ├── Models/           # Clases de modelo (Producto)
-│   ├── Services/         # Lógica de negocio
-│   ├── Data/             # Acceso a datos
-│   └── Program.cs        # Punto de entrada
-├── README.md
-└── .gitignore
+├── .gitignore
+├── ProyectoInventario.sln
+├── Inventario/                    # Proyecto principal
+│   ├── Inventario.csproj
+│   ├── Producto.cs               # Modelo de producto
+│   └── InventarioService.cs      # Servicio de negocio
+└── ProyectoInventario/            # Proyecto de pruebas
+    ├── Inventario.Tests.csproj
+    ├── Inventario.Test.cs        # Tests unitarios
+    └── MSTestSettings.cs
 ```
 
-## 💾 Base de Datos
+## 🧪 Pruebas Unitarias
 
-El proyecto utiliza un sistema de almacenamiento de datos. Asegúrate de configurar:
-- Cadena de conexión (si usa SQL Server)
-- Migraciones de base de datos
-- Scripts de inicialización
+El proyecto incluye 4 tests principales:
+
+- ✅ **RegistrarProducto** - Verifica que se agregan productos correctamente
+- ✅ **ActualizarCantidadProducto** - Verifica que se actualiza la cantidad
+- ✅ **ConsultarProducto** - Verifica la búsqueda por código
+- ✅ **ListarProductos** - Verifica el listado de todos los productos
+
+Ejecuta con: `dotnet test`
+
+## 📋 Modelo de Datos
+
+### Clase Producto
+```csharp
+public class Producto
+{
+    public string Codigo { get; set; }      // Identificador único
+    public string Nombre { get; set; }      // Nombre del producto
+    public int Cantidad { get; set; }       // Cantidad en inventario
+    
+    public Producto(string codigo, string nombre, int cantidad)
+}
+```
+
+### Servicio InventarioService
+Métodos disponibles:
+- `RegistrarProducto(Producto)` - Agregar producto
+- `ListarProductos()` - Obtener todos los productos
+- `ActualizarCantidad(string codigo, int nuevaCantidad)` - Actualizar cantidad
+- `ConsultarProducto(string codigo)` - Buscar por código
 
 ## 🤝 Contribuir
 
