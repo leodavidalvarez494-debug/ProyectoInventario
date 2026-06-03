@@ -10,6 +10,12 @@ namespace Inventario
     {
         private readonly List<Producto> productos = new();
 
+        private Producto? BuscarProducto(string codigo)
+        {
+            return productos.FirstOrDefault(
+                p => p.Codigo == codigo);
+        }
+
         public void RegistrarProducto(Producto producto)
         {
             productos.Add(producto);
@@ -22,8 +28,7 @@ namespace Inventario
         public void ActualizarCantidad(string codigo, int nuevaCantidad)
         {
 
-            var producto = productos.FirstOrDefault(
-                p => p.Codigo == codigo);
+            var producto = BuscarProducto(codigo);
 
             if (producto != null)
             {
@@ -33,9 +38,9 @@ namespace Inventario
 
         public Producto? ConsultarProducto(string codigo)
         {
-            return productos.FirstOrDefault(
-            p => p.Codigo == codigo);
+            return BuscarProducto(codigo);
         }
+    
     }
 
 }
