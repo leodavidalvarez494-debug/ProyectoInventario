@@ -46,5 +46,21 @@ namespace Inventario.Tests
             Assert.IsNotNull(producto);
             Assert.AreEqual("Mouse", producto.Nombre);
         }
+
+        [TestMethod]
+        public void ListarProductos()
+        {
+            var inventario = new InventarioService();
+
+            inventario.RegistrarProducto(
+                new Producto("P001", "Mouse", 10));
+
+            inventario.RegistrarProducto(
+                new Producto("P002", "Teclado", 5));
+
+            var productos = inventario.ListarProductos();
+
+            Assert.AreEqual(2, productos.Count);
+        }
     }
 }
